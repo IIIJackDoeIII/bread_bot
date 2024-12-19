@@ -1,35 +1,62 @@
 BREADS = {
     "rye": {
-        "name": {"Русский": "Ржаной хлеб", "English": "Rye Bread"},
+        "name": {
+            "Русский": "Ржаной хлеб",
+            "English": "Rye Bread"
+        },
         "subcategories": {
-            "rye1": {
-                "name": {"Русский": "РХ1", "English": "Rye Bread 1"},
-                "short_description": {"Русский": "Короткое описание РХ1.", "English": "Short description of Rye Bread 1."},
-                "full_description": {"Русский": "Полное описание РХ1.", "English": "Full description of Rye Bread 1."},
-                "image": "/home/agata/Pictures/Bread/resized/3.jpg"
+            "Borodinski_Delux": {
+                "name": {
+                    "Русский": "Бородинский DELUX",
+                    "English": "Borodinski Delux"
+                },
+                "short_description": {
+                    "Русский": "Короткое описание РХ1.",
+                    "English": "Short description of Rye Bread 1."
+                },
+                "full_description": {
+                    "Русский": "Полное описание РХ1.",
+                    "English": "Full description of Rye Bread 1."
+                },
+                "image": "images/borodinski_delux.jpg"
+            },
+            "Salinātā": {
+                "name": {
+                    "Русский": "Salinātā rudzu rupjmaize",
+                    "English": "Salinātā rudzu rupjmaize"
+                },
+                "short_description": {
+                    "Русский": "Короткое описание РХ1.",
+                    "English": "Short description of Rye Bread 1."
+                },
+                "full_description": {
+                    "Русский": "Полное описание РХ1.",
+                    "English": "Full description of Rye Bread 1."
+                },
+                "image": "images/salinata.jpg"
             },
         }
     },
     "white": {
-        "name": {"Русский": "Белый хлеб", "English": "White Bread"},
+        "name": {
+            "Русский": "Пшеничный хлеб",
+            "English": "Wheat Bread"
+        },
         "subcategories": {
-            "white1": {
-                "name": {"Русский": "БХ1", "English": "White Bread 1"},
-                "short_description": {"Русский": "Короткое описание БХ1.", "English": "Short description of White Bread 1."},
-                "full_description": {"Русский": "Полное описание БХ1.", "English": "Full description of White Bread 1."},
-                "image": "/home/agata/Pictures/Bread/resized/1.jpg"
-            },
-             "white2": {
-                "name": {"Русский": "БХ2", "English": "White Bread 2"},
-                "short_description": {"Русский": "Короткое описание БХ2.", "English": "Short description of White Bread 2."},
-                "full_description": {"Русский": "Полное описание БХ2.", "English": "Full description of White Bread 2."},
-                "image": "/home/agata/Pictures/Bread/resized/1.jpg"
-            },
-             "white3": {
-                "name": {"Русский": "БХ2", "English": "White Bread 2"},
-                "short_description": {"Русский": "Короткое описание БХ2.", "English": "Short description of White Bread 2."},
-                "full_description": {"Русский": "Полное описание БХ2.", "English": "Full description of White Bread 2."},
-                "image": "/home/agata/Pictures/Bread/resized/1.jpg"
+            "Baton": {
+                "name": {
+                    "Русский": "Нарезной батон",
+                    "English": "Butter Bread"
+                },
+                "short_description": {
+                    "Русский": "Короткое описание БХ1.",
+                    "English": "Short description of White Bread 1."
+                },
+                "full_description": {
+                    "Русский": "Полное описание БХ1.",
+                    "English": "Full description of White Bread 1."
+                },
+                "image": "images/baton.jpg"
             },
         }
     }
