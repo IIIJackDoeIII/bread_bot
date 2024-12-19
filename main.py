@@ -2,7 +2,7 @@ import asyncio
 from aiogram import Bot, Dispatcher
 from config import API_TOKEN
 
-from handlers import start, menu, language,catalog,order  # Убедитесь, что все обработчики подключены
+from handlers import start, menu, language,catalog,order,cart # Убедитесь, что все обработчики подключены
 
 import logging
 
@@ -18,7 +18,9 @@ dp.include_router(start.router)
 dp.include_router(menu.router)
 dp.include_router(language.router)
 dp.include_router(catalog.router)
+dp.include_router(cart.router)
 dp.include_router(order.router)
+
 # dp.include_router(location.router)
 
 

@@ -20,10 +20,8 @@ async def set_language(message: types.Message):
         user = session.query(User).filter_by(telegram_id=telegram_id).first()
 
         if user:
-            logging.info(f"Updating language for user {telegram_id} to {selected_language}")
             user.language = selected_language
         else:
-            logging.info(f"Creating new user {telegram_id} with language {selected_language}")
             user = User(
                 telegram_id=telegram_id,
                 language=selected_language,
@@ -33,7 +31,6 @@ async def set_language(message: types.Message):
             session.add(user)
 
         session.commit()
-        logging.info(f"Language {selected_language} saved successfully for user {telegram_id}")
 
         # Отправляем сообщение с клавиатурой
         await message.answer(

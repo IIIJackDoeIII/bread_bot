@@ -79,36 +79,36 @@ async def view_bread_list(callback_query: types.CallbackQuery):
     bread = BREADS.get(bread_type)
     if bread and "subcategories" in bread:
         for sub_id, sub in bread["subcategories"].items():
-            logger.info(f"Sending bread info: {sub['name'][language]} for user {telegram_id}")
-
-            # Используем FSInputFile для отправки локального файла
-            photo_file = FSInputFile(sub["image"])
-
-            await callback_query.message.answer_photo(
-                photo=photo_file,
-                caption=f"<b>{sub['name'][language]}</b>\n\n{sub['details'][language]}",
-                reply_markup=types.InlineKeyboardMarkup(
-                    inline_keyboard=[
-                        [
-                            types.InlineKeyboardButton(
-                                text=get_translation("details_button", language),
-                                callback_data=f"expand_bread:{bread_type}:{sub_id}"
-                            ),
-                            types.InlineKeyboardButton(
-                                text=get_translation("add_to_cart_button", language),
-                                callback_data=f"add_to_cart:{bread_type}:{sub_id}"
-                            )
+            try:
+                photo_file = FSInputFile(sub["image"])  # Локальный файл
+                await callback_query.message.answer_photo(
+                    photo=photo_file,
+                    caption=f"<b>{sub['name'][language]}</b>\n\n{sub['short_description'][language]}",
+                    reply_markup=types.InlineKeyboardMarkup(
+                        inline_keyboard=[
+                            [
+                                types.InlineKeyboardButton(
+                                    text=get_translation("details_button", language),
+                                    callback_data=f"expand_bread:{bread_type}:{sub_id}"
+                                ),
+                                types.InlineKeyboardButton(
+                                    text=get_translation("add_to_cart_button", language),
+                                    callback_data=f"add_to_cart:{bread_type}:{sub_id}"
+                                )
+                            ]
                         ]
-                    ]
-                ),
-                parse_mode="HTML"
-            )
+                    ),
+                    parse_mode="HTML"
+                )
+            except Exception as e:
+                logger.error(f"Error sending bread image: {e}")
     else:
         logger.warning(f"Bread category {bread_type} not found for user {telegram_id}.")
         await callback_query.message.answer(
             get_translation("category_not_found", language)
         )
     await callback_query.answer()
+
 
 # Обработчик для показа подробной информации
 @router.callback_query(lambda callback_query: callback_query.data.startswith("expand_bread:"))
@@ -124,8 +124,7 @@ async def expand_bread_details(callback_query: types.CallbackQuery):
 
     if sub:
         await callback_query.message.edit_caption(
-            caption=f"<b>{sub['name'][language]}</b>\n\n{sub['details'][language]}\n\n"
-                    f"{get_translation('full_description', language)}",
+            caption=f"<b>{sub['name'][language]}</b>\n\n{sub['full_description'][language]}\n\n",
             reply_markup=types.InlineKeyboardMarkup(
                 inline_keyboard=[
                     [
@@ -160,7 +159,7 @@ async def collapse_bread_details(callback_query: types.CallbackQuery):
 
     if sub:
         await callback_query.message.edit_caption(
-            caption=f"<b>{sub['name'][language]}</b>\n\n{sub['details'][language]}",
+            caption=f"<b>{sub['name'][language]}</b>\n\n{sub['short_description'][language]}",
             reply_markup=types.InlineKeyboardMarkup(
                 inline_keyboard=[
                     [

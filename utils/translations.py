@@ -1,3 +1,5 @@
+import logging
+
 translations = {
     "menu_greeting": {
         "English": "Welcome to the menu! Please select an option.",
@@ -6,14 +8,6 @@ translations = {
     "choose_category": {
         "English": "Choose a category of bread:",
         "Русский": "Выберите категорию хлеба:"
-    },
-    "rye_bread": {
-        "English": "Rye Bread",
-        "Русский": "Ржаной хлеб"
-    },
-    "white_bread": {
-        "English": "White Bread",
-        "Русский": "Белый хлеб"
     },
     "browse_bread": {
         "Русский": "Список хлеба",
@@ -28,8 +22,8 @@ translations = {
         "English": "Change Language"
     },
     "cart_empty": {
-        "Русский": "Ваша корзина пуста.",
-        "English": "Your cart is empty."
+        "Русский": "❌ Ваша корзина пуста.",
+        "English": "❌ Your cart is empty."
     },
     "cart_summary": {
         "Русский": "Содержимое корзины:",
@@ -51,43 +45,99 @@ translations = {
         "Русский": "Очистить корзину",
         "English": "Clear Cart"
     },
-    "added_to_cart": {
-        "Русский": "Товар добавлен в корзину!",
-        "English": "Item added to cart!"
+    "done_button": {
+        "Русский": "Готово",
+        "English": "Done"
     },
-    "error_adding_to_cart": {
-        "Русский": "Ошибка при добавлении товара в корзину.",
-        "English": "Error adding item to cart."
+    "dynamic_form": {
+        "Русский": "🔽 Форма заказа:",
+        "English": "🔽 Order Form:"
     },
-    "language_prompt": {
-        "Русский": "Пожалуйста, выберите язык:",
-        "English": "Please select your language:"
+    "enter_name": {
+        "Русский": "👉 Введите ваше имя:",
+        "English": "👉 Enter your name:"
     },
-    "language_set": {
-        "Русский": "Язык установлен: Русский.",
-        "English": "Language set to English."
+    "enter_phone": {
+        "Русский": "👉 Введите ваш телефон (например: +79123456789):",
+        "English": "👉 Enter your phone number (e.g., +123456789):"
     },
-    "language_changed": {
-        "Русский": "Язык изменён на Русский.",
-        "English": "Language changed to English."
+    "attach_receipt": {
+        "Русский": "👉 Прикрепите чек об оплате:",
+        "English": "👉 Attach the payment receipt:"
     },
-    "language_already_set": {
-        "Русский": "Язык уже установлен на Русский.",
-        "English": "The language is already set to English."
+    "name_error": {
+        "Русский": "❌ Имя должно содержать только буквы и быть длиннее одного символа.",
+        "English": "❌ Name must contain only letters and be longer than one character."
     },
-    "welcome_back": {
-        "Русский": "Добро пожаловать обратно!",
-        "English": "Welcome back!"
+    "phone_error": {
+        "Русский": "❌ Некорректный номер телефона. Попробуйте ещё раз.",
+        "English": "❌ Invalid phone number. Please try again."
     },
-    "welcome_select_language": {
-        "Русский": "Добро пожаловать! Пожалуйста, выберите язык:",
-        "English": "Welcome! Please select your language:"
+    "name_saved": {
+        "Русский": "✅ Имя сохранено!",
+        "English": "✅ Name saved!"
     },
-    "details_button": {  # Кнопка для показа подробностей
+    "phone_saved": {
+        "Русский": "✅ Телефон сохранён!",
+        "English": "✅ Phone number saved!"
+    },
+    "receipt_uploaded": {
+        "Русский": "✅ Чек успешно загружен!",
+        "English": "✅ Receipt successfully uploaded!"
+    },
+    "not_specified": {
+        "Русский": "Не указано",
+        "English": "Not specified"
+    },
+    "order_summary": {
+        "Русский": "📝 **Ваш заказ:**\n",
+        "English": "📝 **Your Order:**\n"
+    },
+    "edit_order": {
+        "Русский": "Исправить данные",
+        "English": "Edit Details"
+    },
+    "confirm_order": {
+        "Русский": "Оформить",
+        "English": "Confirm Order"
+    },
+    "order_confirmed": {
+        "Русский": "🎉 Ваш заказ оформлен! Администратор свяжется с вами в ближайшее время.",
+        "English": "🎉 Your order has been placed! An administrator will contact you shortly."
+    },
+    "back_to_cart": {
+        "Русский": "Назад",
+        "English": "Back"
+    },
+    "back_prompt": {
+        "Русский": "Для возврата нажмите 'Назад'.",
+        "English": "Press 'Back' to return."
+    },
+    "uploaded": {
+        "Русский": "Загружен",
+        "English": "Uploaded"
+    },
+    "not_uploaded": {
+        "Русский": "Не загружен",
+        "English": "Not uploaded"
+    },
+    "return_to_cart": {
+        "Русский": "Возвращаемся в корзину...",
+        "English": "Returning to the cart..."
+    },
+    "begin_checkout": {
+        "Русский": "Оформить",
+        "English": "Begin Checkout"
+    },
+    "proceed_to_checkout": {
+        "Русский": "Оформить заказ",
+        "English": "Proceed to Checkout"
+    },
+    "details_button": {
         "Русский": "Подробнее",
         "English": "Details"
     },
-    "collapse_button": {  # Кнопка для сворачивания подробностей
+    "collapse_button": {
         "Русский": "Свернуть",
         "English": "Collapse"
     },
@@ -99,24 +149,36 @@ translations = {
         "Русский": "Полное описание: Это пример полного описания.",
         "English": "Full description: This is a sample full description."
     },
-    "checkout_prompt": {
-        "Русский": "Введите ваше имя, телефон и прикрепите скриншот оплаты.",
-        "English": "Enter your name, phone number, and attach a payment receipt."
-    },
-    "back_to_cart": {
-        "Русский": "Назад",
-        "English": "Back"
-    },
-    "done_button": {
-        "Русский": "Готово",
-        "English": "Done"
-    },
-    "order_confirmed": {
-        "Русский": "Ваш заказ принят! Оператор свяжется с вами в ближайшее время.",
-        "English": "Your order has been received! Our operator will contact you shortly."
-    }
+    "order_summary_name": {
+    "Русский": "Имя: ",
+    "English": "Name: "
+},
+"order_summary_phone": {
+    "Русский": "Телефон: ",
+    "English": "Phone: "
+},
+"order_summary_receipt": {
+    "Русский": "Чек: ",
+    "English": "Receipt: "
+},
+"receipt_attached": {
+    "Русский": "Прикреплен",
+    "English": "Attached"
+},
+"receipt_not_attached": {
+    "Русский": "Не прикреплен",
+    "English": "Not attached"
+},
+"order_details": {
+    "Русский": "Информация о заказе",
+    "English": "Order Details"
+},
 }
 
 def get_translation(key, language):
     """Получает перевод по ключу и языку."""
-    return translations.get(key, {}).get(language, key)
+    translation = translations.get(key, {}).get(language, key)
+    if translation == key:
+        logging.warning(f"Перевод для ключа '{key}' и языка '{language}' отсутствует. Используется ключ по умолчанию.")
+    return translation
+

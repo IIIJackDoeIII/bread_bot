@@ -11,7 +11,7 @@ class User(Base):
     id = Column(Integer, primary_key=True)
     telegram_id = Column(Integer, unique=True, nullable=False)
     language = Column(String, default="Русский")
-    name = Column(String, default="Unknown")
+    name = Column(String, nullable=True)
     phone = Column(String, nullable=True)
 
 # Таблица корзины
